@@ -1,10 +1,10 @@
-package Shared;
+package shared;
 
-public class DeleteEventReturnObject implements java.io.Serializable{
+public class DeleteNoteReturnObject implements java.io.Serializable{
 	/**
 	 * 
 	 */
-	private static final long serialVersionUID = -6929787423780799387L;
+	private static final long serialVersionUID = -904424362046891818L;
 	private boolean deleted;
 	private String message;
 	public boolean isDeleted() {
