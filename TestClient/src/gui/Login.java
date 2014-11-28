@@ -1,7 +1,15 @@
 package gui;
 import javax.swing.*;
+
+import com.google.gson.Gson;
+
+import shared.LogInObject;
+import shared.LogInReturnObject;
+
 import java.awt.*;
 import java.awt.event.*;
+
+import logic.ServerConnection;
 
 
 
@@ -48,13 +56,23 @@ public class Login  extends JFrame{
 					public void actionPerformed(ActionEvent event){
 						String uname = txtUser.getText();
 						String pword = password.getText();
-						if(uname.equals("kare12ac")&&pword.equals("5678")){
+						LogInObject login = new LogInObject();
+						login.setAuthUsername(uname);
+						login.setAuthPassword(pword);
+						login.setIsAdmin(false);
+						Gson gson = new Gson();
+						String jsonString = gson.toJson(login);
+						ServerConnection connection = new ServerConnection();
+						LogInReturnObject loginreturn = new LogInReturnObject();
+						loginreturn = gson.fromJson(connection.execute(jsonString), LogInReturnObject.class);
+						
+						if(loginreturn.isLogOn()){
 							Calendar calendar= new Calendar();
 							calendar.setVisible(true);
 							dispose();
 						}else{
 							
-							JOptionPane.showMessageDialog(null, "Wrong Password or Username");
+							JOptionPane.showMessageDialog(null, loginreturn.getExplanation());
 							txtUser.setText("");
 							password.setText("");
 							txtUser.requestFocus();

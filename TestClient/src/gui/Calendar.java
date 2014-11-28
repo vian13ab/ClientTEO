@@ -57,7 +57,7 @@ public class Calendar extends JFrame{
 		public void actionPerformed(ActionEvent event){
 			addCalendar.addActionListener(new ActionListener(){
 				public void actionPerformed(ActionEvent event){
-			JOptionPane.showMessageDialog(null, "Wrong Password or Username");
+			JOptionPane.showMessageDialog(null, "Test");
 					}
 			});
 		}
