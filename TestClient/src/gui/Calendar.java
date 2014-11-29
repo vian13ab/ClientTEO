@@ -16,7 +16,7 @@ public class Calendar extends JFrame{
 		JButton addNote = new JButton("Add Note");
 		JButton share = new JButton("Share...");
 		
-		Calendar(){
+		public Calendar(){
 			super("CBS Calendar");
 			setSize(1000,1000);
 			setLocation(500,280);

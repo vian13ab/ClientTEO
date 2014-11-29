@@ -15,6 +15,11 @@ import logic.ServerConnection;
 
 public class Login  extends JFrame{
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -3505735372539163059L;
+	
 	public static void main(String[]args){
 		Login frameTabel = new Login();
 		
@@ -25,7 +30,7 @@ public class Login  extends JFrame{
 		JPasswordField password = new JPasswordField(15);
 		JLabel UN = new JLabel("Username");
 		JLabel PW = new JLabel ("Password");
-		Login(){
+		private Login(){
 			super("Login Autentification");
 			setSize(1000,1000);
 			setLocation(500,280);

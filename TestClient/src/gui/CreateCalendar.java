@@ -1,4 +1,4 @@
-package logic;
+package gui;
 
 import gui.Calendar;
 
