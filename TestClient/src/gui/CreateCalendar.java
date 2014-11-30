@@ -5,17 +5,20 @@ import gui.Calendar;
 import java.util.ArrayList;
 
 import com.google.gson.Gson;
+import com.google.gson.JsonSyntaxException;
 
 import javax.swing.*;
 
 import logic.ServerConnection;
 import shared.CreateCalendarObject;
 import shared.CreateCalendarReturnObject;
+import shared.LogInReturnObject;
 
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.IOException;
 
 	public class CreateCalendar extends JFrame{
 		
@@ -25,10 +28,10 @@ import java.awt.event.ActionListener;
 		 */
 		private static final long serialVersionUID = 128743479876712760L;
 		
-		public static void main(String[]args){
-			CreateCalendar frameTabel = new CreateCalendar();
-			
-		}
+//		public static void main(String[]args){
+//			CreateCalendar frameTabel = new CreateCalendar();
+//			
+//		}
 		ArrayList<String> user = new ArrayList<String>();
 		ArrayList<String> author = new ArrayList<String>();
 		JButton btncreate = new JButton("Create Calendar");
@@ -38,36 +41,42 @@ import java.awt.event.ActionListener;
 		JTextField txtUser = new JTextField(30);
 		JTextField txtAuthor = new JTextField(30);
 		JButton btnAddUser = new JButton("Add");
+		JButton btnAddAuthors = new JButton("Add");
 		JTextArea textAreaUsers = new JTextArea();
+		JTextArea textAreaAuthors = new JTextArea();
+		JLabel PW = new JLabel("Please write 1 for private and 0 for public");
 		JLabel HE = new JLabel("Add Calendar");
 		JLabel CN = new JLabel("Calendar name: ");
 		JLabel PP = new JLabel ("Is it private or public?");
 		JLabel US = new JLabel("Insert username for users who shall be connected to this calendar: ");
 		JLabel AU = new JLabel("Insert username of users who are allowed to edit in this calender");
-		private final JTextArea textAreaAuthors = new JTextArea();
-		private final JButton btnAdd = new JButton("Add");
 		
 		public CreateCalendar(){
 			super("Create Calendar");
-			setSize(700,700);
+			setSize(550,550);
 			setLocation(500,280);
 			panel.setLayout(null);
 			
 			
 			txtCname.setBounds(187,80,150,20);
 			txtPrivPub.setBounds(187,112,150,20);
-			txtUser.setBounds(451,304,150,20);
-			txtAuthor.setBounds(451,141,150,20);
-			btncreate.setBounds(461,473,150,30);
-			btnAddUser.setBounds(600, 138, 67, 29);
-			textAreaUsers.setBounds(471, 336, 150, 117);
+			txtUser.setBounds(35,346,150,20);
+			txtAuthor.setBounds(35,183,150,20);
+			btncreate.setFont(new Font("Lucida Grande", Font.BOLD, 13));
+			btncreate.setBounds(35,482,150,40);
+			btnAddUser.setBounds(187, 343, 67, 29);
+			btnAddAuthors.setBounds(187, 180, 67, 29);
+			textAreaUsers.setBounds(266, 348, 150, 117);
+			textAreaAuthors.setBounds(266, 183, 150, 117);
 			HE.setFont(new Font("Arial", Font.BOLD, 30));
 			HE.setForeground(new Color(0, 0, 128));
 			HE.setBounds(196, 0, 262, 74);
 			CN.setBounds(35, 75, 115, 30);
 			PP.setBounds(35, 117, 150, 15);
-			US.setBounds(35, 299, 423, 30);
-			AU.setBounds(35, 144, 412, 15);
+			US.setBounds(35, 311, 423, 30);
+			AU.setBounds(35, 156, 412, 15);
+			PW.setFont(new Font("Lucida Grande", Font.PLAIN, 9));
+			PW.setBounds(344, 115, 198, 16);
 			
 			
 			panel.add(txtCname);
@@ -76,29 +85,22 @@ import java.awt.event.ActionListener;
 			panel.add(txtAuthor);
 			panel.add(btncreate);
 			panel.add(btnAddUser);
+			panel.add(btnAddAuthors);
 			panel.add(textAreaUsers);
+			panel.add(textAreaAuthors);
 			panel.add(HE);
 			panel.add(CN);
 			panel.add(PP);
 			panel.add(US);
 			panel.add(AU);
+			panel.add(PW);
 			
 			getContentPane().add(panel);
-			textAreaAuthors.setBounds(461, 173, 150, 117);
-			
-			panel.add(textAreaAuthors);
-			
-			JLabel lblPleaseWrite = new JLabel("Please write 1 for private and 0 for public");
-			lblPleaseWrite.setFont(new Font("Lucida Grande", Font.PLAIN, 9));
-			lblPleaseWrite.setBounds(344, 115, 198, 16);
-			panel.add(lblPleaseWrite);
-			btnAdd.setBounds(600, 301, 67, 29);
-			
-			panel.add(btnAdd);
 			
 			setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 			setVisible(true);
 			actionCreateCalendar();
+			btnAddAuthors.addActionListener(new ActionAddAuthors());
 			btnAddUser.addActionListener(new ActionAddUser());
 		}
 		
@@ -117,11 +119,17 @@ import java.awt.event.ActionListener;
 							String jsonString = gson.toJson(createcalendar);
 							ServerConnection connection = new ServerConnection();
 							CreateCalendarReturnObject createcalendarreturn = new CreateCalendarReturnObject();
-							createcalendarreturn = gson.fromJson(connection.execute(jsonString), CreateCalendarReturnObject.class);
+							try {
+								createcalendarreturn = gson.fromJson(connection.connectToServerAndSendReturnObject(jsonString), CreateCalendarReturnObject.class);
+							} catch (JsonSyntaxException e) {
+								e.printStackTrace();
+							} catch (IOException e) {
+								e.printStackTrace();
+							}
 							
 							if(createcalendarreturn.isCreated()){
 								JOptionPane.showMessageDialog(null, createcalendarreturn.getMessage());
-								dispose();
+//								dispose();
 							}else{
 								
 								JOptionPane.showMessageDialog(null, createcalendarreturn.getMessage());
@@ -132,6 +140,23 @@ import java.awt.event.ActionListener;
 					});
 				}
 			
+				public class ActionAddAuthors implements ActionListener{
+
+					@Override
+					public void actionPerformed(ActionEvent e) {
+						author.add(txtAuthor.getText());
+						String arrayListOutput = "";
+						for (String i: author){
+							arrayListOutput = arrayListOutput.concat(i);
+							arrayListOutput = arrayListOutput.concat("\n");
+						}
+						textAreaAuthors.setText(arrayListOutput);
+						
+					}
+					
+				}
+				
+				
 				public class ActionAddUser implements ActionListener{
 
 					@Override
@@ -148,7 +173,6 @@ import java.awt.event.ActionListener;
 					
 				}
 	}
-//	author.add(txtAuthor.getText());
 	
 
 

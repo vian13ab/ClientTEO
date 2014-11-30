@@ -20,6 +20,8 @@ public class Calendar extends JFrame{
 		JButton addEvent = new JButton("Add Event");
 		JButton addNote = new JButton("Add Note");
 		JButton share = new JButton("Share...");
+		JButton btnRandomQuote = new JButton("Random quote");
+		JButton btnForecast = new JButton("Forecast");
 		
 		public Calendar(){
 			super("CBS Calendar");
@@ -47,16 +49,17 @@ public class Calendar extends JFrame{
 			share.setBounds(25, 320, 105, 39);
 			panel.add(share);
 			
+			btnRandomQuote.setBounds(25, 371, 105, 39);
+			panel.add(btnRandomQuote);
+			
+			btnForecast.setBounds(25, 422, 105, 39);
+			panel.add(btnForecast);
+			
 			getContentPane().add(panel);
+			
 			setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 			setVisible(true);
 			actioncalendar();
-			
-//			actionCalendar action = new actionCalendar();
-//			addCalendar.addActionListener(action);
-//			addEvent.addActionListener(action);
-//			addNote.addActionListener(action);
-//			share.addActionListener(action);
 			
 		}
 		public void actioncalendar(){
@@ -67,7 +70,6 @@ public class Calendar extends JFrame{
 					}
 			});
 		}
-
 }
 
 
