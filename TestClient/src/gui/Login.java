@@ -2,12 +2,14 @@ package gui;
 import javax.swing.*;
 
 import com.google.gson.Gson;
+import com.google.gson.JsonSyntaxException;
 
 import shared.LogInObject;
 import shared.LogInReturnObject;
 
 import java.awt.*;
 import java.awt.event.*;
+import java.io.IOException;
 
 import logic.ServerConnection;
 
@@ -20,17 +22,17 @@ public class Login  extends JFrame{
 	 */
 	private static final long serialVersionUID = -3505735372539163059L;
 	
-	public static void main(String[]args){
-		Login frameTabel = new Login();
-		
-	}
+//	public static void main(String[]args){
+//		Login frameTabel = new Login();
+//		
+//	}
 		JButton btnlogin = new JButton("Login");
 		JPanel panel = new JPanel();
 		JTextField txtUser = new JTextField(15);
 		JPasswordField password = new JPasswordField(15);
 		JLabel UN = new JLabel("Username");
 		JLabel PW = new JLabel ("Password");
-		private Login(){
+		public Login(){
 			super("Login Autentification");
 			setSize(1000,1000);
 			setLocation(500,280);
@@ -69,7 +71,13 @@ public class Login  extends JFrame{
 						String jsonString = gson.toJson(login);
 						ServerConnection connection = new ServerConnection();
 						LogInReturnObject loginreturn = new LogInReturnObject();
-						loginreturn = gson.fromJson(connection.execute(jsonString), LogInReturnObject.class);
+						try {
+							loginreturn = gson.fromJson(connection.connectToServerAndSendReturnObject(jsonString), LogInReturnObject.class);
+						} catch (JsonSyntaxException e) {
+							e.printStackTrace();
+						} catch (IOException e) {
+							e.printStackTrace();
+						}
 						
 						if(loginreturn.isLogOn()){
 							Calendar calendar= new Calendar();

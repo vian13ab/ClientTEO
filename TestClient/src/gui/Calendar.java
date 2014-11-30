@@ -6,6 +6,11 @@ import java.awt.event.*;
 
 
 public class Calendar extends JFrame{
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -8277958209048953251L;
+
 	public static void main (String []args){
 		Calendar frameTabel = new Calendar();
 	}
@@ -45,6 +50,7 @@ public class Calendar extends JFrame{
 			getContentPane().add(panel);
 			setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 			setVisible(true);
+			actioncalendar();
 			
 //			actionCalendar action = new actionCalendar();
 //			addCalendar.addActionListener(action);
@@ -53,11 +59,11 @@ public class Calendar extends JFrame{
 //			share.addActionListener(action);
 			
 		}
-	
-		public void actionPerformed(ActionEvent event){
+		public void actioncalendar(){
 			addCalendar.addActionListener(new ActionListener(){
 				public void actionPerformed(ActionEvent event){
-			JOptionPane.showMessageDialog(null, "Test");
+					CreateCalendar createcalendar = new CreateCalendar();
+					createcalendar.setVisible(true);
 					}
 			});
 		}
