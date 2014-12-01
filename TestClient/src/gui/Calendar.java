@@ -10,18 +10,15 @@ public class Calendar extends JFrame{
 	 * 
 	 */
 	private static final long serialVersionUID = -8277958209048953251L;
-
-	public static void main (String []args){
-		Calendar frameTabel = new Calendar();
-	}
+	
 		JLabel welcome = new JLabel("Welcome to CBS Calendar");
 		JPanel panel = new JPanel();
-		JButton addCalendar = new JButton("Add Calendar");
-		JButton addEvent = new JButton("Add Event");
-		JButton addNote = new JButton("Add Note");
+		JButton editCalendar = new JButton("Edit Calendar");
+		JButton editEvent = new JButton("Edit Event");
 		JButton share = new JButton("Share...");
 		JButton btnRandomQuote = new JButton("Random quote");
 		JButton btnForecast = new JButton("Forecast");
+		JButton logOut = new JButton("Log out");
 		
 		public Calendar(){
 			super("CBS Calendar");
@@ -36,49 +33,58 @@ public class Calendar extends JFrame{
 			welcome.setBounds(310,-3,392,160);
 			panel.add(welcome);
 			
-			addCalendar.setBounds(25, 140, 105, 39);
-			panel.add(addCalendar);
+			editCalendar.setBounds(25, 140, 105, 39);
+			panel.add(editCalendar);
 			
-			addEvent.setBounds(25, 200, 105, 39);
-			panel.add(addEvent);
+			editEvent.setBounds(25, 191, 105, 39);
+			panel.add(editEvent);
 			
-			
-			addNote.setBounds(25, 260, 105, 39);
-			panel.add(addNote);
-			
-			share.setBounds(25, 320, 105, 39);
+			share.setBounds(25, 242, 105, 39);
 			panel.add(share);
 			
-			btnRandomQuote.setBounds(25, 371, 105, 39);
+			btnRandomQuote.setBounds(25, 293, 105, 39);
 			panel.add(btnRandomQuote);
 			
-			btnForecast.setBounds(25, 422, 105, 39);
+			btnForecast.setBounds(25, 344, 105, 39);
 			panel.add(btnForecast);
+			
+			logOut.setBounds(895, 6, 105, 39);
+			panel.add(logOut);
 			
 			getContentPane().add(panel);
 			
 			setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 			setVisible(true);
-			actioncalendar();
+			editCalendar.addActionListener(new ActionEditCalendar());
+			editEvent.addActionListener(new ActionEditEvent());
+			logOut.addActionListener(new ActionLogOut());
 			
 		}
-		public void actioncalendar(){
-			addCalendar.addActionListener(new ActionListener(){
-				public void actionPerformed(ActionEvent event){
-					CreateCalendar createcalendar = new CreateCalendar();
-					createcalendar.setVisible(true);
+		public class ActionEditCalendar implements ActionListener{
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+					EditCalendar editcalendar = new EditCalendar();
+					editcalendar.setVisible(true);
 					}
-			});
-		}
+			}
+		
+		public class ActionEditEvent implements ActionListener{
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+					EditEvent editevent = new EditEvent();
+					editevent.setVisible(true);
+					}
+			}
+
+		public class ActionLogOut implements ActionListener{
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+					Login login = new Login();
+					login.setVisible(true);
+					dispose();
+					}
+			}
 }
-
-
-		
-
-
-		
-			
-		
-			
-	
-

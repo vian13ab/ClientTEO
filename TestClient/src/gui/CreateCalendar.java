@@ -28,14 +28,12 @@ import java.io.IOException;
 		 */
 		private static final long serialVersionUID = 128743479876712760L;
 		
-//		public static void main(String[]args){
-//			CreateCalendar frameTabel = new CreateCalendar();
-//			
-//		}
+		String msg = "";
 		ArrayList<String> user = new ArrayList<String>();
 		ArrayList<String> author = new ArrayList<String>();
-		JButton btncreate = new JButton("Create Calendar");
 		JPanel panel = new JPanel();
+		JButton btncreate = new JButton("Create Calendar");
+		JButton cancel = new JButton("Cancel");
 		JTextField txtCname = new JTextField(30);
 		JTextField txtPrivPub = new JTextField(30);
 		JTextField txtUser = new JTextField(30);
@@ -51,6 +49,7 @@ import java.io.IOException;
 		JLabel US = new JLabel("Insert username for users who shall be connected to this calendar: ");
 		JLabel AU = new JLabel("Insert username of users who are allowed to edit in this calender");
 		
+		
 		public CreateCalendar(){
 			super("Create Calendar");
 			setSize(550,550);
@@ -62,15 +61,16 @@ import java.io.IOException;
 			txtPrivPub.setBounds(187,112,150,20);
 			txtUser.setBounds(35,346,150,20);
 			txtAuthor.setBounds(35,183,150,20);
-			btncreate.setFont(new Font("Lucida Grande", Font.BOLD, 13));
-			btncreate.setBounds(35,482,150,40);
+			btncreate.setFont(new Font("Lucida Grande", Font.PLAIN, 13));
+			btncreate.setBounds(286,488,140,29);
+			cancel.setBounds(219, 488, 67, 29);
 			btnAddUser.setBounds(187, 343, 67, 29);
 			btnAddAuthors.setBounds(187, 180, 67, 29);
 			textAreaUsers.setBounds(266, 348, 150, 117);
 			textAreaAuthors.setBounds(266, 183, 150, 117);
 			HE.setFont(new Font("Arial", Font.BOLD, 30));
 			HE.setForeground(new Color(0, 0, 128));
-			HE.setBounds(196, 0, 262, 74);
+			HE.setBounds(187, 6, 198, 74);
 			CN.setBounds(35, 75, 115, 30);
 			PP.setBounds(35, 117, 150, 15);
 			US.setBounds(35, 311, 423, 30);
@@ -86,6 +86,7 @@ import java.io.IOException;
 			panel.add(btncreate);
 			panel.add(btnAddUser);
 			panel.add(btnAddAuthors);
+			panel.add(cancel);
 			panel.add(textAreaUsers);
 			panel.add(textAreaAuthors);
 			panel.add(HE);
@@ -97,17 +98,24 @@ import java.io.IOException;
 			
 			getContentPane().add(panel);
 			
-			setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+			
+			setDefaultCloseOperation(closeOperation());
 			setVisible(true);
-			actionCreateCalendar();
+			btncreate.addActionListener(new ActionCreateCalendar());
 			btnAddAuthors.addActionListener(new ActionAddAuthors());
 			btnAddUser.addActionListener(new ActionAddUser());
+			cancel.addActionListener(new ActionCancel());
+		}
+		public int closeOperation(){
+			setVisible(false);
+			return 1;
+			
 		}
 		
-		
-				public void actionCreateCalendar(){
-					btncreate.addActionListener(new ActionListener(){
-						public void actionPerformed(ActionEvent event){
+		public class ActionCreateCalendar implements ActionListener{
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
 							String cname = txtCname.getText();
 							String privpub = txtPrivPub.getText();
 							CreateCalendarObject createcalendar = new CreateCalendarObject(cname, privpub, user, author);
@@ -120,25 +128,22 @@ import java.io.IOException;
 							ServerConnection connection = new ServerConnection();
 							CreateCalendarReturnObject createcalendarreturn = new CreateCalendarReturnObject();
 							try {
-								createcalendarreturn = gson.fromJson(connection.connectToServerAndSendReturnObject(jsonString), CreateCalendarReturnObject.class);
-							} catch (JsonSyntaxException e) {
-								e.printStackTrace();
-							} catch (IOException e) {
-								e.printStackTrace();
+								msg = connection.connectToServerAndSendReturnObject(jsonString);
+							} catch (JsonSyntaxException e1) {
+								e1.printStackTrace();
+							} catch (IOException e1) {
+								e1.printStackTrace();
 							}
 							
 							if(createcalendarreturn.isCreated()){
-								JOptionPane.showMessageDialog(null, createcalendarreturn.getMessage());
-//								dispose();
+								JOptionPane.showMessageDialog(null, msg);
+								setVisible(false);
 							}else{
 								
-								JOptionPane.showMessageDialog(null, createcalendarreturn.getMessage());
-								user.clear();
-								author.clear();
+								JOptionPane.showMessageDialog(null, msg);
 							}
 						}
-					});
-				}
+					}
 			
 				public class ActionAddAuthors implements ActionListener{
 
@@ -168,6 +173,16 @@ import java.io.IOException;
 							arrayListOutput = arrayListOutput.concat("\n");
 						}
 						textAreaUsers.setText(arrayListOutput);
+						
+					}
+					
+				}
+				
+				public class ActionCancel implements ActionListener{
+
+					@Override
+					public void actionPerformed(ActionEvent e) {
+						dispose();
 						
 					}
 					

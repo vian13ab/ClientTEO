@@ -22,45 +22,47 @@ public class Login  extends JFrame{
 	 */
 	private static final long serialVersionUID = -3505735372539163059L;
 	
-//	public static void main(String[]args){
-//		Login frameTabel = new Login();
-//		
-//	}
 		JButton btnlogin = new JButton("Login");
 		JPanel panel = new JPanel();
 		JTextField txtUser = new JTextField(15);
 		JPasswordField password = new JPasswordField(15);
+		JLabel HD = new JLabel("Welcome to CBS Calendar");
 		JLabel UN = new JLabel("Username");
 		JLabel PW = new JLabel ("Password");
 		public Login(){
 			super("Login Autentification");
-			setSize(1000,1000);
+			setSize(500,250);
 			setLocation(500,280);
 			panel.setLayout(null);
 			
 			
-			txtUser.setBounds(440,108,150,20);
-			password.setBounds(440,140,150,20);
-			btnlogin.setBounds(473,195,80,20);
-			UN.setBounds(255, 111, 90, 15);
-			PW.setBounds(255, 135, 115, 30);
+			txtUser.setBounds(235,97,150,20);
+			password.setBounds(235,129,150,20);
+			btnlogin.setBounds(305,183,80,20);
+			HD.setForeground(new Color(0, 0, 128));
+			HD.setFont(new Font("Arial", Font.BOLD, 20));
+			HD.setBounds(125, 27, 260, 20);
+			UN.setBounds(125, 100, 90, 15);
+			PW.setBounds(125, 129, 69, 20);
 			
 			
 			panel.add(btnlogin);
 			panel.add(txtUser);
 			panel.add(password);
+			panel.add(HD);
 			panel.add(UN);
 			panel.add(PW);
 			
 			getContentPane().add(panel);
 			setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 			setVisible(true);
-			actionlogin();
+			btnlogin.addActionListener(new ActionLogin());
 			
 		}
-			public void actionlogin(){
-				btnlogin.addActionListener(new ActionListener(){
-					public void actionPerformed(ActionEvent event){
+		public class ActionLogin implements ActionListener{
+			
+					@Override
+					public void actionPerformed(ActionEvent e) {
 						String uname = txtUser.getText();
 						String pword = password.getText();
 						LogInObject login = new LogInObject();
@@ -73,10 +75,10 @@ public class Login  extends JFrame{
 						LogInReturnObject loginreturn = new LogInReturnObject();
 						try {
 							loginreturn = gson.fromJson(connection.connectToServerAndSendReturnObject(jsonString), LogInReturnObject.class);
-						} catch (JsonSyntaxException e) {
-							e.printStackTrace();
-						} catch (IOException e) {
-							e.printStackTrace();
+						} catch (JsonSyntaxException e1) {
+							e1.printStackTrace();
+						} catch (IOException e1) {
+							e1.printStackTrace();
 						}
 						
 						if(loginreturn.isLogOn()){
@@ -90,9 +92,8 @@ public class Login  extends JFrame{
 							password.setText("");
 							txtUser.requestFocus();
 						}
-					}
-				});
-			}
+				}
+		}
 
 
 }
