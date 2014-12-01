@@ -13,8 +13,6 @@ import javax.swing.JTextField;
 
 import logic.ServerConnection;
 import shared.DeleteCalendarObject;
-import shared.LogInObject;
-import shared.LogInReturnObject;
 
 import com.google.gson.Gson;
 import com.google.gson.JsonSyntaxException;
@@ -27,7 +25,8 @@ public class DeleteCalendar extends JFrame{
 	 * 
 	 */
 	private static final long serialVersionUID = 5034047532157719179L;
-
+	
+	String msg = "";
 	JPanel panel = new JPanel();
 	JLabel HD = new JLabel("Delete Calendar");
 	JLabel UN = new JLabel("Insert your username: ");
@@ -67,7 +66,7 @@ public class DeleteCalendar extends JFrame{
 		setDefaultCloseOperation(closeOperation());
 		setVisible(true);
 		
-//		delete.addActionListener(new ActionDelete());
+		delete.addActionListener(new ActionDelete());
 		cancel.addActionListener(new ActionCancel());
 	}
 	public int closeOperation(){
@@ -76,35 +75,31 @@ public class DeleteCalendar extends JFrame{
 		
 	}
 	
-//	public class ActionDelete implements ActionListener{
-//
-//		@Override
-//		public void actionPerformed(ActionEvent e) {
-//			String uname = username.getText();
-//			String caldel = calToDelete.getText();
-//			DeleteCalendarObject deletecalobject = new DeleteCalendarObject();
-//			deletecalobject.setuserID(uname);
-//			deletecalobject.setCalendarToDelete(caldel);
-//			Gson gson = new Gson();
-//			String jsonString = gson.toJson(login);
-//			ServerConnection connection = new ServerConnection();
-////			DeleteCalendarReturnObject deletecalendarreturn = new DeleteCalendarReturnObject();
-//			try {
-//				deletecalendarreturn = gson.fromJson(connection.connectToServerAndSendReturnObject(jsonString), DeleteCalendarReturnObject.class);
-//			} catch (JsonSyntaxException e) {
-//				e.printStackTrace();
-//			} catch (IOException e) {
-//				e.printStackTrace();
-//			}
-//			
-//			if(deletecalendarreturn.isDeleted()){
-//				JOptionPane.showMessageDialog(null, deletecalendarreturn.getExplanation());
-//				setVisible(false);
-//			}else{
-//				JOptionPane.showMessageDialog(null, deletecalendarreturn.getExplanation());
-//			}
-//		}
-//	});
+	public class ActionDelete implements ActionListener{
+
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			String uname = username.getText();
+			String caldel = calToDelete.getText();
+			DeleteCalendarObject deletecalobject = new DeleteCalendarObject();
+			deletecalobject.setuserID(uname);
+			deletecalobject.setCalendarToDelete(caldel);
+			Gson gson = new Gson();
+			String jsonString = gson.toJson(deletecalobject);
+			ServerConnection connection = new ServerConnection();
+			try {
+				msg = connection.connectToServerAndSendReturnObject(jsonString);
+			} catch (JsonSyntaxException e1) {
+				e1.printStackTrace();
+			} catch (IOException e1) {
+				e1.printStackTrace();
+			}
+		
+				JOptionPane.showMessageDialog(null, msg);
+				calToDelete.setText("");
+				calToDelete.requestFocus();
+		}
+	}
 	
 	public class ActionCancel implements ActionListener{
 
