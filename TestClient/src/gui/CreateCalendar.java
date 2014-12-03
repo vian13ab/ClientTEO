@@ -156,6 +156,8 @@ import java.io.IOException;
 							arrayListOutput = arrayListOutput.concat("\n");
 						}
 						textAreaAuthors.setText(arrayListOutput);
+						txtAuthor.setText("");
+						txtAuthor.requestFocus();
 						
 					}
 					
@@ -173,6 +175,8 @@ import java.io.IOException;
 							arrayListOutput = arrayListOutput.concat("\n");
 						}
 						textAreaUsers.setText(arrayListOutput);
+						txtUser.setText("");
+						txtUser.requestFocus();
 						
 					}
 					

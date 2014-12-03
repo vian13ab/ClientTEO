@@ -57,6 +57,7 @@ public class Calendar extends JFrame{
 			setVisible(true);
 			editCalendar.addActionListener(new ActionEditCalendar());
 			editEvent.addActionListener(new ActionEditEvent());
+			btnRandomQuote.addActionListener(new ActionRandomQuote());
 			logOut.addActionListener(new ActionLogOut());
 			
 		}
@@ -86,5 +87,16 @@ public class Calendar extends JFrame{
 					login.setVisible(true);
 					dispose();
 					}
+		}
+			
+		public class ActionRandomQuote implements ActionListener{
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+					RandomQuote randomquote = new RandomQuote();
+					randomquote.setVisible(true);
+					
+				}
+				
 			}
 }

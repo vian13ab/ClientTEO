@@ -127,6 +127,7 @@ public class CreateEvent extends JFrame{
 		setDefaultCloseOperation(closeOperation());
 		setVisible(true);
 		createEvent.addActionListener(new ActionCreateEvent());
+		cancel.addActionListener(new ActionCancel());
 		
 	}
 	public int closeOperation(){
@@ -180,7 +181,17 @@ public class CreateEvent extends JFrame{
 				JOptionPane.showMessageDialog(null, createeventreturnobject.getMessage());
 			}
 		}
-		
 	}
+		
+		public class ActionCancel implements ActionListener{
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				dispose();
+				
+			}
+			
+				
+			}
 
 }

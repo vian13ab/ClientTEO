@@ -27,4 +27,7 @@ public class CreateEventReturnObject implements Serializable{
 		this.created = created;
 		this.message = message;
 	}
+	public CreateEventReturnObject(){
+		
+	}
 }

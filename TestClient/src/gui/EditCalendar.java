@@ -7,8 +7,24 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+
 import java.awt.Font;
 import java.awt.Color;
+import java.io.IOException;
+import java.util.ArrayList;
+
+import javax.swing.JTextArea;
+import javax.swing.JTextField;
+import javax.swing.JScrollPane;
+
+import logic.ServerConnection;
+
+import com.google.gson.Gson;
+import com.google.gson.JsonSyntaxException;
+
+import shared.Event;
+import shared.GetCalendarObject;
+import shared.GetCalendarReturnObject;
 
 public class EditCalendar extends JFrame{
 	
@@ -21,6 +37,8 @@ public class EditCalendar extends JFrame{
 	JLabel HD = new JLabel("Edit Calendar");
 	JButton createCalendar = new JButton("Create calendar");
 	JButton deleteCalendar = new JButton("Delete calendar");
+	private final JTextArea list = new JTextArea();
+	private JTextField username;
 	
 	public EditCalendar(){
 		super("Edit Calendar");
@@ -39,14 +57,61 @@ public class EditCalendar extends JFrame{
 		panel.add(deleteCalendar);
 		
 		getContentPane().add(panel);
+		
+		JScrollPane scrollPane = new JScrollPane();
+		scrollPane.setBounds(31, 78, 335, 285);
+		panel.add(scrollPane);
+		scrollPane.setViewportView(list);
+		
+		username = new JTextField();
+		username.setText("Enter your username");
+		username.setBounds(31, 38, 214, 28);
+		panel.add(username);
+		username.setColumns(10);
+		
+		JButton showCalendars = new JButton("Show calendars");
+		showCalendars.setBounds(242, 39, 124, 29);
+		panel.add(showCalendars);
 		setDefaultCloseOperation(closeOperation());
 		setVisible(true);
+		showCalendars.addActionListener(new ActionShowCalendars());
 		createCalendar.addActionListener(new ActionCreateCalendar());
 		deleteCalendar.addActionListener(new ActionDeleteCalendar());
 	}
 	public int closeOperation(){
 		setVisible(false);
 		return 1;
+		
+	}
+	
+	public class ActionShowCalendars implements ActionListener{
+
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			GetCalendarObject getcaelendarobject = new GetCalendarObject();
+			getcaelendarobject.setUserID(username.getText());
+			Gson gson = new Gson();
+			String jsonString = gson.toJson(getcaelendarobject);
+			ServerConnection connection = new ServerConnection();
+			GetCalendarReturnObject calendarreturnobject = new GetCalendarReturnObject();
+			try {
+				calendarreturnobject = gson.fromJson(connection.connectToServerAndSendReturnObject(jsonString), GetCalendarReturnObject.class);
+			} catch (JsonSyntaxException e1) {
+				e1.printStackTrace();
+			} catch (IOException e1) {
+				e1.printStackTrace();
+			}
+			
+			String calendars = "";
+			for(ArrayList<Event> i: calendarreturnobject.getCalendars()){
+				for(Event x: i){
+					calendars = calendars.concat(x.getDescription());
+					calendars = calendars.concat("\n");
+				}
+			}
+			
+			list.setText(calendars);
+		}
 		
 	}
 	
@@ -69,5 +134,4 @@ public class EditCalendar extends JFrame{
 			deletecalendar.setVisible(true);
 		}
 	}
-
 }
