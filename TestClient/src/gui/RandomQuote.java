@@ -36,17 +36,17 @@ public class RandomQuote extends JFrame{
 	
 	public RandomQuote(){
 		super("Random quote");
-		setSize(450, 300);
+		setSize(1000, 170);
 		setLocation(500, 280);
 		panel.setLayout(null);
 		
 		author.setBounds(6, 375, 124, 47);
 		subject.setBounds(6, 375, 124, 47);
-		quote.setBounds(43, 51, 369, 160);
-		thankYou.setBounds(185, 223, 104, 33);
+		quote.setBounds(6, 51, 988, 25);
+		thankYou.setBounds(450, 88, 104, 33);
 		HD.setForeground(new Color(0, 0, 128));
 		HD.setFont(new Font("Arial", Font.BOLD, 20));
-		HD.setBounds(148, 6, 168, 33);
+		HD.setBounds(420, 6, 168, 33);
 		
 		panel.add(quote);
 		panel.add(HD);
@@ -82,7 +82,7 @@ public class RandomQuote extends JFrame{
 		}
 		
 		quote.setText(quoteobject.getQuote());
-		subject.setText(quoteobject.getSubject());
+		subject.setText(quoteobject.getTopic());
 		author.setText(quoteobject.getAuthor());
 		
 		}

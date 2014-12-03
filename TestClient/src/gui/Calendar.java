@@ -15,7 +15,6 @@ public class Calendar extends JFrame{
 		JPanel panel = new JPanel();
 		JButton editCalendar = new JButton("Edit Calendar");
 		JButton editEvent = new JButton("Edit Event");
-		JButton share = new JButton("Share...");
 		JButton btnRandomQuote = new JButton("Random quote");
 		JButton btnForecast = new JButton("Forecast");
 		JButton logOut = new JButton("Log out");
@@ -39,13 +38,10 @@ public class Calendar extends JFrame{
 			editEvent.setBounds(25, 191, 105, 39);
 			panel.add(editEvent);
 			
-			share.setBounds(25, 242, 105, 39);
-			panel.add(share);
-			
-			btnRandomQuote.setBounds(25, 293, 105, 39);
+			btnRandomQuote.setBounds(25, 242, 105, 39);
 			panel.add(btnRandomQuote);
 			
-			btnForecast.setBounds(25, 344, 105, 39);
+			btnForecast.setBounds(25, 293, 105, 39);
 			panel.add(btnForecast);
 			
 			logOut.setBounds(895, 6, 105, 39);
@@ -58,6 +54,7 @@ public class Calendar extends JFrame{
 			editCalendar.addActionListener(new ActionEditCalendar());
 			editEvent.addActionListener(new ActionEditEvent());
 			btnRandomQuote.addActionListener(new ActionRandomQuote());
+			btnForecast.addActionListener(new ActionForecast());
 			logOut.addActionListener(new ActionLogOut());
 			
 		}
@@ -99,4 +96,15 @@ public class Calendar extends JFrame{
 				}
 				
 			}
+		
+		public class ActionForecast implements ActionListener{
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				ForecastDay forecast = new ForecastDay();
+				forecast.setVisible(true);
+				
+			}
+			
+		}
 }
