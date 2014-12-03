@@ -19,6 +19,7 @@ import java.awt.Font;
 import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import javax.swing.SwingConstants;
 
 public class RandomQuote extends JFrame{
 
@@ -28,22 +29,24 @@ public class RandomQuote extends JFrame{
 	private static final long serialVersionUID = 2711262288421058178L;
 	
 	JPanel panel = new JPanel();
-	JTextField author = new JTextField();
-	JTextField subject = new JTextField();
-	JTextArea quote = new JTextArea();
+	JLabel author = new JLabel();
+	JLabel subject = new JLabel();
+	JLabel quote = new JLabel();
 	JLabel HD = new JLabel("Quote of the day");
 	JButton thankYou = new JButton("Thank you!");
+	private final JLabel lblQuote = new JLabel("Quote:");
 	
 	public RandomQuote(){
 		super("Random quote");
-		setSize(1000, 170);
+		setSize(1000, 250);
 		setLocation(500, 280);
 		panel.setLayout(null);
 		
-		author.setBounds(6, 375, 124, 47);
-		subject.setBounds(6, 375, 124, 47);
-		quote.setBounds(6, 51, 988, 25);
-		thankYou.setBounds(450, 88, 104, 33);
+		author.setBounds(340, 44, 168, 33);
+		subject.setBounds(568, 44, 178, 33);
+		quote.setHorizontalAlignment(SwingConstants.CENTER);
+		quote.setBounds(6, 125, 988, 25);
+		thankYou.setBounds(453, 177, 104, 33);
 		HD.setForeground(new Color(0, 0, 128));
 		HD.setFont(new Font("Arial", Font.BOLD, 20));
 		HD.setBounds(420, 6, 168, 33);
@@ -51,8 +54,21 @@ public class RandomQuote extends JFrame{
 		panel.add(quote);
 		panel.add(HD);
 		panel.add(thankYou);
+		panel.add(author);
+		panel.add(subject);
 		
 		getContentPane().add(panel);
+		
+		JLabel lblAuthor = new JLabel("Author:");
+		lblAuthor.setBounds(290, 52, 53, 16);
+		panel.add(lblAuthor);
+		
+		JLabel lblTopic = new JLabel("Topic:");
+		lblTopic.setBounds(524, 52, 44, 16);
+		panel.add(lblTopic);
+		lblQuote.setBounds(477, 97, 44, 16);
+		
+		panel.add(lblQuote);
 		
 		setDefaultCloseOperation(closeOperation());
 		
