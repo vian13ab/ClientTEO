@@ -39,21 +39,10 @@ public class Configurations {
             Object obj = jsonParser.parse(json);
             JSONObject jsonObject = (JSONObject) obj;
 
-            // Getting json values for SQL variables and DB
-            setHost((String) jsonObject.get("host"));
-            setPort((String) jsonObject.get("port"));
-            setUsername((String) jsonObject.get("username"));
-            setDbname((String) jsonObject.get("dbname"));
-            setPassword((String) jsonObject.get("password"));
 
             // Getting json values for KEY variables
             setFfcryptkey((String) jsonObject.get("ffcryptkey"));
 
-            // Getting json values for weather variables
-            setWeather_expiration_time((String) jsonObject.get("weather_expiration_date"));
-            setWeather_lat((String) jsonObject.get("weather_lat"));
-            setWeather_lon((String) jsonObject.get("weather_lon"));
-            setWeather_future_in_days((String) jsonObject.get("weather_future_in_days"));
 
         } catch (ParseException ex) {
             ex.printStackTrace();

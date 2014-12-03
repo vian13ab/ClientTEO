@@ -33,7 +33,7 @@ public class EditEvent extends JFrame{
 	private static final long serialVersionUID = 4946099623438005761L;
 	
 	JPanel panel = new JPanel();
-	JLabel HD = new JLabel("Edit Calendar");
+	JLabel HD = new JLabel("Edit Event");
 	JButton createEvent = new JButton("Create event");
 	JButton deleteEvent = new JButton("Delete Event");
 	JButton addNote = new JButton("Add Note");
