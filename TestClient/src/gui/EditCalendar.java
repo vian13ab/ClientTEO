@@ -73,6 +73,7 @@ public class EditCalendar extends JFrame{
 		showCalendars.setBounds(242, 39, 124, 29);
 		panel.add(showCalendars);
 		setDefaultCloseOperation(closeOperation());
+		list.setEditable(false);
 		setVisible(true);
 		showCalendars.addActionListener(new ActionShowCalendars());
 		createCalendar.addActionListener(new ActionCreateCalendar());

@@ -53,6 +53,8 @@ public class ForecastDay extends JFrame{
 		
 		setDefaultCloseOperation(closeOperation());
 		
+		description.setEditable(false);
+		
 		setVisible(true);
 		
 		forecast();

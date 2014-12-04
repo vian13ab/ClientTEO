@@ -75,6 +75,8 @@ public class EditEvent extends JFrame{
 		deleteEvent.addActionListener(new ActionDeleteEvent());
 		addNote.addActionListener(new ActionAddNote());
 		
+		list.setEditable(false);
+		
 		setVisible(true);
 		
 	}
