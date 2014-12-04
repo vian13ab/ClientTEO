@@ -29,7 +29,6 @@ public class ForecastDay extends JFrame{
 	private static final long serialVersionUID = -1761070361083302999L;
 
 	JPanel panel = new JPanel();
-//	JTextArea description = new JTextArea();
 	JTextArea description = new JTextArea();
 	JLabel HD = new JLabel("Forecast");
 	JButton thankYou = new JButton("Thank you!");
