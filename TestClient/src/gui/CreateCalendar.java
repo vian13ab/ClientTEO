@@ -133,8 +133,8 @@ import java.io.IOException;
 							}
 							
 							if(createcalendarreturn.isCreated()){
+								dispose();
 								JOptionPane.showMessageDialog(null, msg);
-								setVisible(false);
 							}else{
 								
 								JOptionPane.showMessageDialog(null, msg);
