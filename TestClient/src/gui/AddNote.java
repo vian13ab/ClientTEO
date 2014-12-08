@@ -54,6 +54,8 @@ public class AddNote extends JFrame{
 		eventName.setBounds(6,97,331,20);
 		name.setBounds(344,65,150,20);
 		con.setBounds(109,131,228,139);
+		con.setWrapStyleWord(true);
+		con.setLineWrap(true);
 		eventN.setBounds(344,97,150,20);
 		addNote.setBounds(246, 282, 91, 29);
 		cancel.setBounds(167, 282, 67, 29);
