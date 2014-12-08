@@ -11,8 +11,8 @@ import javax.swing.SwingConstants;
 import com.google.gson.Gson;
 import com.google.gson.JsonSyntaxException;
 
-import shared.DeleteNoteObject;
-import shared.DeleteNoteReturnObject;
+import shared.SaveNoteObject;
+import shared.SaveNoteReturnObject;
 
 import java.awt.Color;
 import java.awt.Font;
@@ -81,34 +81,40 @@ public class DeleteNote extends JFrame{
 
 		@Override
 		public void actionPerformed(ActionEvent e) {
-			String eventname = event.getText();
-			String username = user.getText();
-			DeleteNoteObject deletenoteobject = new DeleteNoteObject();
-			deletenoteobject.setEventID(eventname);
-			deletenoteobject.setAuthNote(username);
+			String eventID = eventId.getText();
+			String userID = userId.getText();
+			SaveNoteObject savenoteobject = new SaveNoteObject();
+			savenoteobject.setEventName(eventID);
+			savenoteobject.setUserEmail(userID);
+			savenoteobject.setNoteContent(" ");
 			Gson gson = new Gson();
-			String jsonString = gson.toJson(deletenoteobject);
+			String jsonString = gson.toJson(savenoteobject);
 			ServerConnection connection = new ServerConnection();
-			DeleteNoteReturnObject deletenotereturnobject = new DeleteNoteReturnObject();
+			SaveNoteReturnObject savenotereturn = new SaveNoteReturnObject();
 			try {
-				deletenotereturnobject = gson.fromJson(connection.connectToServerAndSendReturnObject(jsonString), DeleteNoteReturnObject.class);
+				savenotereturn = gson.fromJson(connection.connectToServerAndSendReturnObject(jsonString), SaveNoteReturnObject.class);
 			} catch (JsonSyntaxException e1) {
 				e1.printStackTrace();
 			} catch (IOException e1) {
 				e1.printStackTrace();
 			}
-			if(deletenotereturnobject.isDeleted()){
-				JOptionPane.showMessageDialog(null, deletenotereturnobject.getMessage());
+			
+			if(savenotereturn.isUpdated()){
+				JOptionPane.showMessageDialog(null, "Your note has now been deleted");
 				dispose();
 			}else{
 				
-				JOptionPane.showMessageDialog(null, deletenotereturnobject.getMessage());
-				event.setText("");
-				event.requestFocus();
+				JOptionPane.showMessageDialog(null, "Oops, something went wrong. Please try again");
+				eventId.setText("");
+				userId.setText("");
+				eventId.requestFocus();
+				
 			}
 	}
+			
+			
+		}
 	
-	}
 	
 	public class ActionCancel implements ActionListener{
 
