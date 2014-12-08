@@ -36,7 +36,7 @@ public class EditEvent extends JFrame{
 	JLabel HD = new JLabel("Edit Event");
 	JButton createEvent = new JButton("Create event");
 	JButton deleteEvent = new JButton("Delete Event");
-	JButton addNote = new JButton("Add Note");
+	JButton note = new JButton("Note");
 	JTextField username = new JTextField("Enter your username");
 	JButton showCalendars = new JButton("Show events");
 	JTextArea list = new JTextArea();
@@ -53,14 +53,14 @@ public class EditEvent extends JFrame{
 		HD.setBounds(123, 6, 136, 33);
 		createEvent.setBounds(6, 375, 124, 47);
 		deleteEvent.setBounds(270, 375, 124, 47);
-		addNote.setBounds(138, 375, 124, 47);
+		note.setBounds(138, 375, 124, 47);
 		username.setBounds(31, 38, 198, 30);
 		showCalendars.setBounds(241, 38, 124, 30);
 		
 		panel.add(HD);
 		panel.add(createEvent);
 		panel.add(deleteEvent);
-		panel.add(addNote);
+		panel.add(note);
 		panel.add(username);
 		panel.add(showCalendars);
 		
@@ -73,13 +73,12 @@ public class EditEvent extends JFrame{
 		showCalendars.addActionListener(new ActionShowCalendars());
 		createEvent.addActionListener(new ActionCreateEvent());
 		deleteEvent.addActionListener(new ActionDeleteEvent());
-		addNote.addActionListener(new ActionAddNote());
+		note.addActionListener(new ActionAddNote());
 		
 		list.setEditable(false);
 		
 		setVisible(true);
 		
-		setDefaultCloseOperation(closeOperation());
 		
 	}
 	public int closeOperation(){
@@ -144,8 +143,8 @@ public class EditEvent extends JFrame{
 		
 		@Override
 		public void actionPerformed(ActionEvent e){
-			AddNote addnote = new AddNote();
-			addnote.setVisible(true);
+			EditNote editnote = new EditNote();
+			editnote.setVisible(true);
 		}
 	}
 }
