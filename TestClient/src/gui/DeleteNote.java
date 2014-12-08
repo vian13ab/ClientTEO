@@ -24,6 +24,10 @@ import logic.ServerConnection;
 
 public class DeleteNote extends JFrame{
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 7236495971658627391L;
 	JPanel panel = new JPanel();
 	JLabel HD = new JLabel("Delete note");
 	JLabel event = new JLabel("Please type in the event you want to delete note from:");

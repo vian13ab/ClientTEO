@@ -1,7 +1,5 @@
 package gui;
 
-import gui.Calendar;
-
 import java.util.ArrayList;
 
 import com.google.gson.Gson;
@@ -12,7 +10,6 @@ import javax.swing.*;
 import logic.ServerConnection;
 import shared.CreateCalendarObject;
 import shared.CreateCalendarReturnObject;
-import shared.LogInReturnObject;
 
 import java.awt.Color;
 import java.awt.Font;
