@@ -39,7 +39,7 @@ import java.io.IOException;
 		JButton btnAddAuthors = new JButton("Add");
 		JTextArea textAreaUsers = new JTextArea();
 		JTextArea textAreaAuthors = new JTextArea();
-		JLabel PW = new JLabel("Please write 1 for private and 0 for public");
+		JLabel PW = new JLabel("Please write 0 for private and 1 for public");
 		JLabel HE = new JLabel("Add Calendar");
 		JLabel CN = new JLabel("Calendar name: ");
 		JLabel PP = new JLabel ("Is it private or public?");
