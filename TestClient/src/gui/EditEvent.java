@@ -38,7 +38,7 @@ public class EditEvent extends JFrame{
 	JButton deleteEvent = new JButton("Delete Event");
 	JButton addNote = new JButton("Add Note");
 	JTextField username = new JTextField("Enter your username");
-	JButton showCalendars = new JButton("Show calendars");
+	JButton showCalendars = new JButton("Show events");
 	JTextArea list = new JTextArea();
 	private final JScrollPane scrollPane_1 = new JScrollPane();
 	
@@ -109,7 +109,7 @@ public class EditEvent extends JFrame{
 			String calendars = "";
 			for(ArrayList<Event> i: calendarreturnobject.getCalendars()){
 				for(Event x: i){
-					calendars = calendars.concat(x.getDescription());
+					calendars = calendars.concat(x.getTitle());
 					calendars = calendars.concat("\n");
 				}
 			}

@@ -6,6 +6,7 @@ import java.awt.event.ActionListener;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 import java.awt.Font;
@@ -37,8 +38,11 @@ public class EditCalendar extends JFrame{
 	JLabel HD = new JLabel("Edit Calendar");
 	JButton createCalendar = new JButton("Create calendar");
 	JButton deleteCalendar = new JButton("Delete calendar");
-	private final JTextArea list = new JTextArea();
-	private JTextField username;
+	JButton share = new JButton("Share...");
+	JTextArea list = new JTextArea();
+	JTextField username = new JTextField("Enter your username");
+	JButton showCalendars = new JButton("Show events");
+	JScrollPane scrollPane = new JScrollPane();
 	
 	public EditCalendar(){
 		super("Edit Calendar");
@@ -51,33 +55,33 @@ public class EditCalendar extends JFrame{
 		HD.setBounds(135, 6, 144, 33);
 		createCalendar.setBounds(6, 375, 124, 47);
 		deleteCalendar.setBounds(270, 375, 124, 47);
+		share.setBounds(139, 375, 124, 47);
+		showCalendars.setBounds(242, 39, 124, 29);
+		username.setBounds(31, 38, 214, 28);
+		username.setColumns(10);
+		scrollPane.setBounds(31, 78, 335, 285);
+		scrollPane.setViewportView(list);
+		list.setEditable(false);
 		
 		panel.add(HD);
 		panel.add(createCalendar);
 		panel.add(deleteCalendar);
+		panel.add(scrollPane);
+		panel.add(username);
+		panel.add(showCalendars);
+		panel.add(share);
 		
 		getContentPane().add(panel);
 		
-		JScrollPane scrollPane = new JScrollPane();
-		scrollPane.setBounds(31, 78, 335, 285);
-		panel.add(scrollPane);
-		scrollPane.setViewportView(list);
-		
-		username = new JTextField();
-		username.setText("Enter your username");
-		username.setBounds(31, 38, 214, 28);
-		panel.add(username);
-		username.setColumns(10);
-		
-		JButton showCalendars = new JButton("Show calendars");
-		showCalendars.setBounds(242, 39, 124, 29);
-		panel.add(showCalendars);
 		setDefaultCloseOperation(closeOperation());
-		list.setEditable(false);
 		setVisible(true);
+		
 		showCalendars.addActionListener(new ActionShowCalendars());
 		createCalendar.addActionListener(new ActionCreateCalendar());
 		deleteCalendar.addActionListener(new ActionDeleteCalendar());
+		share.addActionListener(new ActionShare());
+		
+		
 	}
 	public int closeOperation(){
 		setVisible(false);
@@ -106,7 +110,7 @@ public class EditCalendar extends JFrame{
 			String calendars = "";
 			for(ArrayList<Event> i: calendarreturnobject.getCalendars()){
 				for(Event x: i){
-					calendars = calendars.concat(x.getDescription());
+					calendars = calendars.concat(x.getTitle());
 					calendars = calendars.concat("\n");
 				}
 			}
@@ -133,6 +137,14 @@ public class EditCalendar extends JFrame{
 		public void actionPerformed(ActionEvent e) {
 			DeleteCalendar deletecalendar = new DeleteCalendar();
 			deletecalendar.setVisible(true);
+		}
+	}
+	
+	public class ActionShare implements ActionListener{
+		
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			JOptionPane.showMessageDialog(null, "This function is not available right now");
 		}
 	}
 }
