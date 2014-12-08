@@ -17,10 +17,7 @@ public class Forecast {
         this.desc = desc;
     }
     
-    public Forecast() {
-	}
-
-	// Settere og gettere for Forecast klassen
+    // Settere og gettere for Forecast klassen
     public String getDate() {
         return date;
     }

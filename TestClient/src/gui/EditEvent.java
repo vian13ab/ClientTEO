@@ -79,6 +79,8 @@ public class EditEvent extends JFrame{
 		
 		setVisible(true);
 		
+		setDefaultCloseOperation(closeOperation());
+		
 	}
 	public int closeOperation(){
 		setVisible(false);

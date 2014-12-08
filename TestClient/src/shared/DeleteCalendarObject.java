@@ -8,7 +8,7 @@ package shared;
 public class DeleteCalendarObject implements java.io.Serializable
 {
 	private static final long serialVersionUID = 4429483023071064697L;
-	private String overallID = "getCalendar";
+	private String overallID = "deleteCalendar";
 	private String calendarToDelete;
 	private String userID;
 	

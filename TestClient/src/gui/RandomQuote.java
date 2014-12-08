@@ -7,7 +7,6 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextArea;
-import javax.swing.JTextField;
 
 import logic.ServerConnection;
 import shared.QuoteObject;
@@ -19,7 +18,7 @@ import java.awt.Font;
 import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import javax.swing.SwingConstants;
+import javax.swing.JScrollPane;
 
 public class RandomQuote extends JFrame{
 
@@ -31,27 +30,31 @@ public class RandomQuote extends JFrame{
 	JPanel panel = new JPanel();
 	JLabel author = new JLabel();
 	JLabel subject = new JLabel();
-	JLabel quote = new JLabel();
+	JTextArea quote = new JTextArea();
 	JLabel HD = new JLabel("Quote of the day");
 	JButton thankYou = new JButton("Thank you!");
-	private final JLabel lblQuote = new JLabel("Quote:");
+	JLabel lblQuote = new JLabel("Quote:");
+	JScrollPane scrollPane = new JScrollPane();
 	
 	public RandomQuote(){
 		super("Random quote");
-		setSize(1000, 250);
+		setSize(350, 300);
 		setLocation(500, 280);
 		panel.setLayout(null);
 		
-		author.setBounds(340, 44, 168, 33);
-		subject.setBounds(568, 44, 178, 33);
-		quote.setHorizontalAlignment(SwingConstants.CENTER);
-		quote.setBounds(6, 125, 988, 25);
-		thankYou.setBounds(453, 177, 104, 33);
+		author.setBounds(162, 38, 168, 33);
+		subject.setBounds(162, 70, 168, 24);
+		thankYou.setBounds(131, 239, 104, 33);
 		HD.setForeground(new Color(0, 0, 128));
 		HD.setFont(new Font("Arial", Font.BOLD, 20));
-		HD.setBounds(420, 6, 168, 33);
+		HD.setBounds(97, 6, 168, 33);
+		scrollPane.setBounds(17, 138, 313, 96);
 		
-		panel.add(quote);
+		panel.add(scrollPane);
+		scrollPane.setViewportView(quote);
+		quote.setWrapStyleWord(true);
+		quote.setLineWrap(true);
+		quote.setEditable(false);
 		panel.add(HD);
 		panel.add(thankYou);
 		panel.add(author);
@@ -60,13 +63,13 @@ public class RandomQuote extends JFrame{
 		getContentPane().add(panel);
 		
 		JLabel lblAuthor = new JLabel("Author:");
-		lblAuthor.setBounds(290, 52, 53, 16);
+		lblAuthor.setBounds(108, 46, 53, 16);
 		panel.add(lblAuthor);
 		
 		JLabel lblTopic = new JLabel("Topic:");
-		lblTopic.setBounds(524, 52, 44, 16);
+		lblTopic.setBounds(108, 74, 44, 16);
 		panel.add(lblTopic);
-		lblQuote.setBounds(477, 97, 44, 16);
+		lblQuote.setBounds(158, 110, 44, 16);
 		
 		panel.add(lblQuote);
 		

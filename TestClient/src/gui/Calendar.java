@@ -58,6 +58,7 @@ public class Calendar extends JFrame{
 			logOut.addActionListener(new ActionLogOut());
 			
 		}
+			
 		public class ActionEditCalendar implements ActionListener{
 			
 			@Override
@@ -73,16 +74,6 @@ public class Calendar extends JFrame{
 			public void actionPerformed(ActionEvent e) {
 					EditEvent editevent = new EditEvent();
 					editevent.setVisible(true);
-					}
-			}
-
-		public class ActionLogOut implements ActionListener{
-			
-			@Override
-			public void actionPerformed(ActionEvent e) {
-					Login login = new Login();
-					login.setVisible(true);
-					dispose();
 					}
 		}
 			
@@ -107,4 +98,14 @@ public class Calendar extends JFrame{
 			}
 			
 		}
+		
+		public class ActionLogOut implements ActionListener{
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+					Login login = new Login();
+					login.setVisible(true);
+					dispose();
+					}
+			}
 }

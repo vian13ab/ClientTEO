@@ -35,7 +35,6 @@ public class Login  extends JFrame{
 			setLocation(500,280);
 			panel.setLayout(null);
 			
-			
 			txtUser.setBounds(235,97,150,20);
 			password.setBounds(235,129,150,20);
 			btnlogin.setBounds(305,183,80,20);

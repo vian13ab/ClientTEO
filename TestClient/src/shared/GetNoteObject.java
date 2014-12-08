@@ -9,7 +9,7 @@ public class GetNoteObject implements java.io.Serializable
 {
 
 	private static final long serialVersionUID = 7114909483629186981L;
-	private String overallID = "getCalendar";
+	private String overallID = "getNote";
 	private String eventID;
 	private String authorID;
 	
